@@ -52,3 +52,31 @@ async function getBreedImages(breed) {
     }
   }
   
+
+  // === MARK: Render
+// Renders options inside select
+function renderOptions() {
+    getDogBreed().then((data) => {
+      const fragment = document.createDocumentFragment();
+  
+      for (let breed of data) {
+        const option = document.createElement("option");
+        option.textContent = capitalize(breed);
+        option.value = breed;
+        fragment.appendChild(option);
+      }
+  
+      selectEl.appendChild(fragment);
+    });
+  }
+  
+  function renderCarousel(breed) {
+    carouselContainer.innerHTML = "";
+    // target with array loader
+    carouselContainer.appendChild(Carousel(["loader.gif"]), "loading..");
+    getBreedImages(breed).then((data) => {
+      carouselContainer.innerHTML = "";
+      const carousel = Carousel(data, breed);
+      carouselContainer.appendChild(carousel);
+    });
+  }

@@ -80,3 +80,12 @@ function renderOptions() {
       carouselContainer.appendChild(carousel);
     });
   }
+
+  
+// Change on user select
+selectEl.addEventListener("change", (event) => {
+    renderCarousel(event.target.value);
+  });
+  
+  renderOptions();
+  renderCarousel("affenpinscher");
